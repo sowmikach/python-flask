@@ -1,6 +1,6 @@
 Create a virtualenv and activate it:
 
-$ cd flask_usecase
+$ cd python-flask
 
 $ python3 -m venv venv
 
