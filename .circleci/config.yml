@@ -1,25 +1,21 @@
-version: 2.1
+version: 2
 jobs:
-  run_tests:
+  build:
     docker:
-      - image: circleci/python:3.7.4 
+      - image: circleci/python:3.7.4
     steps:
-      - checkout 
+      - checkout
       - run:
-        name: Install Python Dependencies
-        command: |
-          echo 'ecport Path=~$PATH:~/.local/bin' >> $BASH_ENV && source $BASH_ENV
-          pip install --user -r requirements.txt
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
       - run:
-        name: Run Unit Tests
-        command: |
-          pytest --junitxml=test-reports/junit.xml  --html=test-reports/pytest_report.html --self-contained-html
-      - store_test_results:
-        path: test_reports
+          name: Running tests
+          command: |
+            . venv/bin/activate
+            python3 tests.py
       - store_artifacts:
-        path: test_reports
-workflows:
-  build_test:
-    jobs:
-      -run_tests
+          path: test-reports/
+          destination: python-flask
       
