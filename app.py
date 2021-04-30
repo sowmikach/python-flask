@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, json, redirect
 
 app = Flask(__name__)
 
-@app.route(constants.HOME_PATH)
+@app.route('/')
 def index():
     return "Hello World"
 
